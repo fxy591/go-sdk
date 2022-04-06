@@ -1,4 +1,4 @@
-site_name: My Test
+site_name: go-sdk
 nav:
     - index.md
     - 模块.md
