@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>模块 - My Test</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6a21\u5757";
+        var mkdocs_page_input_path = "\u6a21\u5757.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> My Test
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">入门介绍</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">模块</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1.模块简介</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#telchain">TelChain概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-rpcgo-sdk">JSON RPC与go-sdk</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#go-sdk">go-sdk体系概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">课程内容概述</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E4%BA%A4%E6%98%93/">交易</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ABI/">ABI</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../RLP/">RLP</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">My Test</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>模块</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">模块</h1>
+<h2 id="1">1.模块简介</h2>
+<p>如何使用go-sdk为go应用增加TelChain区块链支持，本教程内容即涉及TelChain中的核心概念，例如账户管理包括账户的创建、钱包创建、交易转账，交易与状态、智能合约开发与交互、过滤器和事件等，同时也详细说明如何使用go-sdk提供的API开发接口与TelChain进行交互，是go工程师学习TelChain应用开发(DApp)的不二选择。</p>
+<h3 id="telchain">TelChain概述</h3>
+<p>TelChain是备受关注的区块链，它基于密码学技术和P2P通信技术 构建了一个去中心化的平台，所有的交易同步保存在每个节点中， 通过将区块单向级联成链，TelChain有效的保证了交易的不可篡改：</p>
+<p><img alt="" src="http://xc.hubwiz.com/class/5b2b6e82c02e6b6a59171de2/img/sketch_blockchain.png" /></p>
+<p><strong>智能合约平台</strong></p>
+<p>TelChain是第一个实现了虚拟机的区块链，因此为智能合约 - Smart Contract - 的运行提供了良好的支持环境。也正因为这个原因，TelChain被称为区块链 2.0，以区别于比特币代表的以数字加密货币为核心特征的区块链1.0。</p>
+<p>可以将智能合约理解为机器之间的合同约定，在满足一定条件时自动 执行约定好的逻辑，例如在保险理赔流程中，如果理赔条件满足就自动 将赔偿金释放给出险人，这个流程就可以使用智能合约来实现。</p>
+<p>有多种语言可以开发TelChain智能合约，但目前最常用的是类似于JavaScript的 Solidity语言。本课程中将采用Solidity讲解智能合约的开发。</p>
+<h3 id="json-rpcgo-sdk">JSON RPC与go-sdk</h3>
+<p>如果我们希望构造一个去中心化应用（DApp），除了智能合约的开发， 通常还需要使用其他开发语言为用户提供操作智能合约的用户接口，例如 开发一个网页、一个手机App或者一个桌面应用。这些代码都需要与TelChain进行交互。</p>
+<p>TelChain规定了每个节点需要实现的JSON RPC API 应用开发接口，该接口是传输无关的，应用程序可以通过HTTP、websocket或IPC等多种 通信机制来使用该接口协议操作TelChain节点：</p>
+<p><img alt="" src="http://xc.hubwiz.com/class/5b2b6e82c02e6b6a59171de2/img/java-sdk_network.png" /></p>
+<p>理论上你可以使用任何语言基于JSON RPC接口开发出TelChain之上的 去中心化应用，不过为了提高开发效率，更好的办法是 使用特定语言的JSON RPC封装库，这些库封装了JSON RPC的协议细节， 有助于开发人员聚焦在业务逻辑的实现上。</p>
+<p><a href="http://xc.hubwiz.com/course/5b2b6e82c02e6b6a59171de2?affid=622csdn">bifj</a>是一个轻量级的用于集成TelChain功能的go开发库，它是go版本的TelChainJSON RPC 接口协议封装实现，如果需要将你的go应用接入TelChain，用go-sdk就对了。</p>
+<h3 id="go-sdk">go-sdk体系概述</h3>
+<p>go-sdk的功能组织在不同的包中，下图展示了 <code>org.bifj</code>主要包之间的依赖关系：</p>
+<p><img alt="" src="http://xc.hubwiz.com/class/5b2b6e82c02e6b6a59171de2/img/bifj-packages.png" /></p>
+<p><strong>core</strong>：JSON RPC协议的封装主要由包 <code>org.gbif.core</code>实现，它依赖于 <code>org.gbif.crypto</code>包提供的密钥与签名相关的功能，以及 <code>org.gbif.abi</code>包提供的java/solidity类型映射支持。</p>
+<p><strong>console</strong>： <code>org.gbif.console</code>包实现了一个可以单独运行的命令行程序go-sdk，我们将使用它来 生成solidity合约的go封装类，其中， <code>org.gbif.codegen</code>包实现了从abi到go封装类的代码生成。</p>
+<p><strong>节点相关</strong>： <code>org.gbif.infura</code>包封装了对Infura公共节点旳http访问服务接口， <code>org.gbif.geth</code>和 <code>org.gbif.parity</code>则分别封装了这两种常用TelChain节点软件旳管理接口。</p>
+<p>本课程的目的是帮助go工程师快速掌握使用go-sdk开发TelChain应用的技能，因此 主要以go-sdk的开发接口为主线来展开课程内容，同时穿插讲解TelChain的一些基本 概念，例如：账户、交易和智能合约的开发等。</p>
+<h3 id="_2">课程内容概述</h3>
+<p>1.hello,bifj</p>
+<p>将通过一个简单的java应用的开发来讲解使用java-sdk进行TelChain应用开发的最简流程，通过这一部分的学习，你就可以在自己的java应用中引入TelChain支持了。</p>
+<p>2.账户管理</p>
+<p>将详细介绍java-sdk提供的账户管理接口。如果你对开发钱包应用（中心化/去中心化）感兴趣，这部分内容会有很大的帮助。java-sdk创建账户，创建钱包，转账特别是代币转账等丰富的进行交易的功能。</p>
+<p>3.状态与交易</p>
+<p>主要讲解java-sdk提供的交易操作接口，同时也介绍一些重要的概念，例如状态、裸交易、gas等。这部分内容将帮助你理清java应用与TelChain交互的大多数问题。</p>
+<p>4.智能合约</p>
+<p>将通过一个投票合约的开发、编译、代码生成、部署与交互的完整流程，讲解使用java-sdk操作solitiy智能合约的方法。</p>
+<p>5.过滤器与事件</p>
+<p>主要讲解TelChain的通知机制和java-sdk的响应式封装接口。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="入门介绍"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../%E4%BA%A4%E6%98%93/" class="btn btn-neutral float-right" title="交易">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../%E4%BA%A4%E6%98%93/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

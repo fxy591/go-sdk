@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>RLP - My Test</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "RLP";
+        var mkdocs_page_input_path = "RLP.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> My Test
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">入门介绍</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%A8%A1%E5%9D%97/">模块</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E4%BA%A4%E6%98%93/">交易</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ABI/">ABI</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">RLP</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1rlp">1.递归长度前缀RLP编码方案</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2rlp">2.RLP类型</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3.交易编码</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4.依赖关系</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">My Test</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>RLP</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="rlp">RLP</h1>
+<h2 id="1rlp">1.递归长度前缀RLP编码方案</h2>
+<p>递归长度前缀RLP(Recursive Length Prefix)编码方案是在TelChainBifereum中使用的一种空间有效的对象序列化方案。</p>
+<p>规范本身在<a href="http://gavwood.com/paper.pdf">黄皮书</a>中定义，而下面的页面在<a href="https://github.com/ethereum/wiki/wiki/RLP">ethereum Wiki</a>中定义。</p>
+<h2 id="2rlp">2.RLP类型</h2>
+<p>RLP编码器定义了两种支持类型：</p>
+<ul>
+<li>string</li>
+<li>list</li>
+</ul>
+<p>list类型可以嵌套任意次数，允许对复杂数据结构进行编码。</p>
+<p>java-sdk中的<a href="https://github.com/bifj/bifj/tree/master/rlp">RLP模块</a>提供了RLP编码能力，<a href="https://github.com/bifj/bifj/blob/master/rlp/src/test/java/org/bifj/rlp/RlpEncoderTest.java">RlpEncoderTest</a>演示了许多不同类型值的编码可以参考:</p>
+<pre><code>package org.gbif.rlp;
+
+import java.math.BigInteger;
+import java.util.Arrays;
+
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+public class RlpEncoderTest {
+
+    /**
+     * Examples taken from https://github.com/ethereum/wiki/wiki/RLP#examples.
+
+     *
+     * &lt;p&gt;For further examples see https://github.com/ethereum/tests/tree/develop/RLPTests.
+
+     */
+    @Test
+    public void testEncode() {
+        assertThat(RlpEncoder.encode(RlpString.create(&quot;dog&quot;)),
+                is(new byte[]{ (byte) 0x83, 'd', 'o', 'g' }));
+
+        assertThat(RlpEncoder.encode(new RlpList(RlpString.create(&quot;cat&quot;), RlpString.create(&quot;dog&quot;))),
+                is(new byte[]{
+                        (byte) 0xc8, (byte) 0x83, 'c', 'a', 't', (byte) 0x83, 'd', 'o', 'g'
+                }));
+
+        assertThat(RlpEncoder.encode(RlpString.create(&quot;&quot;)),
+                is(new byte[]{ (byte) 0x80 }));
+
+        assertThat(RlpEncoder.encode(RlpString.create(new byte[] {})),
+                is(new byte[]{ (byte) 0x80 }));
+
+        assertThat(RlpEncoder.encode(new RlpList()),
+                is(new byte[]{ (byte) 0xc0 }));
+
+        assertThat(RlpEncoder.encode(RlpString.create(BigInteger.valueOf(0x0f))),
+                is(new byte[]{ (byte) 0x0f }));
+
+        assertThat(RlpEncoder.encode(RlpString.create(BigInteger.valueOf(0x0400))),
+                is(new byte[]{ (byte) 0x82, (byte) 0x04, (byte) 0x00 }));
+
+        assertThat(RlpEncoder.encode(new RlpList(
+                new RlpList(),
+                new RlpList(new RlpList()),
+                new RlpList(new RlpList(), new RlpList(new RlpList())))),
+                is(new byte[] {
+                        (byte) 0xc7,
+                        (byte) 0xc0,
+                        (byte) 0xc1, (byte) 0xc0,
+                        (byte) 0xc3, (byte) 0xc0, (byte) 0xc1, (byte) 0xc0 }));
+
+        assertThat(RlpEncoder.encode(
+                RlpString.create(&quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit&quot;)),
+                is(new byte[] {
+                        (byte) 0xb8,
+                        (byte) 0x38,
+                        'L', 'o', 'r', 'e', 'm', ' ', 'i', 'p', 's', 'u', 'm', ' ',
+                        'd', 'o', 'l', 'o', 'r', ' ', 's', 'i', 't', ' ',
+                        'a', 'm', 'e', 't', ',', ' ',
+                        'c', 'o', 'n', 's', 'e', 'c', 't', 'e', 't', 'u', 'r', ' ',
+                        'a', 'd', 'i', 'p', 'i', 's', 'i', 'c', 'i', 'n', 'g', ' ',
+                        'e', 'l', 'i', 't'
+                }));
+
+        assertThat(RlpEncoder.encode(RlpString.create(BigInteger.ZERO)),
+                is(new byte[]{ (byte) 0x80 }));
+
+        // https://github.com/paritytech/parity/blob/master/util/rlp/tests/tests.rs#L239
+        assertThat(RlpEncoder.encode(RlpString.create(new byte[] { 0 })),
+                is(new byte[]{ (byte) 0x00 }));
+
+        assertThat(RlpEncoder.encode(
+                new RlpList(
+                        RlpString.create(&quot;zw&quot;),
+                        new RlpList(RlpString.create(4)),
+                        RlpString.create(1))),
+                is(new byte[]{
+                        (byte) 0xc6, (byte) 0x82, (byte) 0x7a, (byte) 0x77, (byte) 0xc1,
+                        (byte) 0x04, (byte) 0x01}));
+
+        // 55 bytes. See https://github.com/bifj/bifj/issues/519
+        byte[] encodeMe = new byte[55];
+        Arrays.fill(encodeMe, (byte) 0);
+        byte[] expectedEncoding = new byte[56];
+        expectedEncoding[0] = (byte) 0xb7;
+        System.arraycopy(encodeMe, 0, expectedEncoding, 1, encodeMe.length);
+        assertThat(RlpEncoder.encode(RlpString.create(encodeMe)),
+                is(expectedEncoding));
+    }
+}
+&lt;/p&gt;
+</code></pre>
+<h2 id="3">3.交易编码</h2>
+<p>在java-sdk中，使用RLP编码将TelChain交易对象编码为字节数组，该字节数组在提交给网络之前被签署。交易类型和签名逻辑位于 <code>Crypto</code>模块内，<a href="https://github.com/bifj/bifj/blob/master/crypto/src/test/java/org/bifj/crypto/TransactionEncoderTest.java">https://github.com/bifj/bifj/blob/master/crypto/src/test/java/org/bifj/crypto/TransactionEncoderTest.java</a>提供交易签名和编码的示例：</p>
+<pre><code>package org.gbif.crypto;
+
+import java.math.BigInteger;
+import java.util.List;
+
+import org.junit.Test;
+
+import org.gbif.rlp.RlpString;
+import org.gbif.rlp.RlpType;
+import org.gbif.utils.Numeric;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThat;
+
+public class TransactionEncoderTest {
+
+    @Test
+    public void testSignMessage() {
+        byte[] signedMessage = TransactionEncoder.signMessage(
+                createBiferTransaction(), SampleKeys.CREDENTIALS);
+        String hexMessage = Numeric.toHexString(signedMessage);
+        assertThat(hexMessage,
+                is(&quot;0xf85580010a840add5355887fffffffffffffff80&quot;
+                        + &quot;1c&quot;
+                        + &quot;a046360b50498ddf5566551ce1ce69c46c565f1f478bb0ee680caf31fbc08ab727&quot;
+                        + &quot;a01b2f1432de16d110407d544f519fc91b84c8e16d3b6ec899592d486a94974cd0&quot;));
+    }
+
+    @Test
+    public void testBiferTransactionAsRlpValues() {
+        List&lt;rlptype&gt; rlpStrings = TransactionEncoder.asRlpValues(createBiferTransaction(),
+                new Sign.SignatureData((byte) 0, new byte[32], new byte[32]));
+        assertThat(rlpStrings.size(), is(9));
+        assertThat(rlpStrings.get(3), equalTo(RlpString.create(new BigInteger(&quot;add5355&quot;, 16))));
+    }
+
+    @Test
+    public void testContractAsRlpValues() {
+        List&lt;rlptype&gt; rlpStrings = TransactionEncoder.asRlpValues(
+                createContractTransaction(), null);
+        assertThat(rlpStrings.size(), is(6));
+        assertThat(rlpStrings.get(3), is(RlpString.create(&quot;&quot;)));
+    }
+
+    @Test
+    public void testEip155Encode() {
+        assertThat(TransactionEncoder.encode(createEip155RawTransaction(), (byte) 1),
+                is(Numeric.hexStringToByteArray(
+                        &quot;0xec098504a817c800825208943535353535353535353535353535353535353535880de0&quot;
+                                + &quot;b6b3a764000080018080&quot;)));
+    }
+
+    @Test
+    public void testEip155Transaction() {
+        // https://github.com/ethereum/EIPs/issues/155
+        Credentials credentials = Credentials.create(
+                &quot;0x4646464646464646464646464646464646464646464646464646464646464646&quot;);
+
+        assertThat(TransactionEncoder.signMessage(
+                createEip155RawTransaction(), (byte) 1, credentials),
+                is(Numeric.hexStringToByteArray(
+                        &quot;0xf86c098504a817c800825208943535353535353535353535353535353535353535880&quot;
+                                + &quot;de0b6b3a76400008025a028ef61340bd939bc2195fe537567866003e1a15d&quot;
+                                + &quot;3c71ff63e1590620aa636276a067cbe9d8997f761aecb703304b3800ccf55&quot;
+                                + &quot;5c9f3dc64214b297fb1966a3b6d83&quot;)));
+    }
+
+    private static RawTransaction createBiferTransaction() {
+        return RawTransaction.createBiferTransaction(
+                BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN, &quot;0xadd5355&quot;,
+                BigInteger.valueOf(Long.MAX_VALUE));
+    }
+
+    static RawTransaction createContractTransaction() {
+        return RawTransaction.createContractTransaction(
+                BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN, BigInteger.valueOf(Long.MAX_VALUE),
+                &quot;01234566789&quot;);
+    }
+
+    private static RawTransaction createEip155RawTransaction() {
+        return RawTransaction.createBiferTransaction(
+                BigInteger.valueOf(9), BigInteger.valueOf(20000000000L),
+                BigInteger.valueOf(21000), &quot;0x3535353535353535353535353535353535353535&quot;,
+                BigInteger.valueOf(1000000000000000000L));
+    }
+}
+&lt;/rlptype&gt;&lt;/rlptype&gt;
+</code></pre>
+<h2 id="4">4.依赖关系</h2>
+<p>这是一个非常轻量级的模块，没有其他依赖项。希望大家在JVM或Android上使用TelChain的RLP编码的项目时会选择使用这个模块，而不再编写自己的实现。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ABI/" class="btn btn-neutral float-left" title="ABI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../ABI/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
