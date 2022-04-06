@@ -2,11 +2,11 @@
 
 ## 1.应用二进制接口即ABI简介
 
-java-sdk开发dapp的应用二进制接口(ABI)是在BifereumTelChain使用java开发的智能合约的数据编码方案。ABI中定义的类型与solidity编写智能合约时所遇到的类型完全相同，即uint8...uint256,int8...int256,布尔bool,字符串string等等。
+go-sdk开发dapp的应用二进制接口(ABI)是在BifereumTelChain使用go开发的智能合约的数据编码方案。ABI中定义的类型与solidity编写智能合约时所遇到的类型完全相同，即uint8...uint256,int8...int256,布尔bool,字符串string等等。
 
-java-sdk中的ABI模块提供了对ABI规范的完全支持，并且包括：
+go-sdk中的ABI模块提供了对ABI规范的完全支持，并且包括：
 
-* 所有ABI类型的Java实现，包括到原生Java类型的转换
+* 所有ABI类型的go实现，包括到原生go类型的转换
 * 函数与事件支持
 * 大量单元测试
 
@@ -14,7 +14,7 @@ java-sdk中的ABI模块提供了对ABI规范的完全支持，并且包括：
 
 ## 2.类型映射
 
-java-sdk中使用的原生Java到ABI类型映射如下：
+go-sdk中使用的原生go到ABI类型映射如下：
 
 * boolean -> bool
 * BigInteger -> uint/int
