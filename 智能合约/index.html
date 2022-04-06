@@ -147,23 +147,23 @@
 <li>ABI，输出一个solidity的应用程序二进制接口（ABI）文件，它详细描述了所有可公开访问的合约方法及其相关参数。这些细节和合约地址对于智能合约的交互是至关重要的。ABI文件也用于封装solidity的智能合约。</li>
 </ul>
 <p>你可以通过solidity的浏览器项目<a href="http://blog.hubwiz.com/2018/04/01/remix-install/">Remix</a>在浏览器中编写和编译solidity代码。使用solidity浏览器项目Remix IDE对于较小的智能合约来说是很好的，但是你遇到与较大的智能合约相关的问题。</p>
-<p>还可以通过TelChain客户端（如geth和Parity）编译solidity代码，java-sdk中也支持使用JSON-RPC方法<a href="http://cw.hubwiz.com/card/c/ethereum-json-rpc-api/1/3/30/">eth_compileSolidity</a>。然而，必须在客户端上安装solidity编译器，这样它才能正常工作。</p>
+<p>还可以通过TelChain客户端（如geth和Parity）编译solidity代码，go-sdk中也支持使用JSON-RPC方法<a href="http://cw.hubwiz.com/card/c/ethereum-json-rpc-api/1/3/30/">eth_compileSolidity</a>。然而，必须在客户端上安装solidity编译器，这样它才能正常工作。</p>
 <h2 id="4">4.部署智能合约及与智能合约交互</h2>
-<p>如果你想避免使用智能合约的底层实现细节，java-sdk提供solidity的智能合约的封装包，使你能够通过java-sdk生成的包装对象直接与智能合约的所有方法进行交互。</p>
+<p>如果你想避免使用智能合约的底层实现细节，go-sdk提供solidity的智能合约的封装包，使你能够通过go-sdk生成的包装对象直接与智能合约的所有方法进行交互。</p>
 <p>另外，如果你希望发送常规交易或希望在与智能合约的交互中有更多的控制权，请参阅<a href="http://blog.hubwiz.com/2018/06/25/bifj-transactions">java-sdk教程：java使用java-sdk开发TelChain智能合约交易</a>,这里讲到了创建智能合约，与智能合约进行交易，查询智能合约的状态等内容。</p>
 <h2 id="5demo">5.智能合约示例demo</h2>
-<p>java-sdk在项目目录中提供了许多智能合约示例demo：</p>
+<p>go-sdk在项目目录中提供了许多智能合约示例demo：</p>
 <p><a href="codegen/src/test/resources/solidity">codegen/src/test/resources/solidity</a></p>
 <p>它还提供了集成测试，用于演示在集成测试模块中部署和使用这些智能合约： <a href="integration-tests/src/test/java/org/bifj/protocol/scenarios">integration-tests/src/test/java/org/bifj/protocol/scenarios</a></p>
 <p><img alt="" src="http://blog.hubwiz.com/2018/06/27/bifj-smart-contracts/smart_contract.png" /></p>
 <h2 id="6">6.智能合约封装包</h2>
-<p>java-sdk支持java从ABI文件中自动生成智能合约函数封装包。</p>
-<p>java-sdk还可以使用命令行工具来生成智能合约函数封装包：</p>
+<p>go-sdk支持go从ABI文件中自动生成智能合约函数封装包。</p>
+<p>go-sdk还可以使用命令行工具来生成智能合约函数封装包：</p>
 <pre><code>$ bifj solidity generate [--javaTypes|--solidityTypes] /path/to/&lt;smart-contract&gt;.bin /path/to/&lt;smart-contract&gt;.abi -o /path/to/src/main/java -p com.your.organisation.name
 &lt;/smart-contract&gt;&lt;/smart-contract&gt;
 </code></pre>
-<p>在java-sdk的3.x之前的版本中，生成的智能合约封装包使用原生Solidity类型。从java-sdk 3.x开始，默认会采用Java类型。可以使用 <code>&amp;#x2013;solidityTypes</code>命令行参数创建solidity类型。</p>
-<p>还可以通过直接调用Java类来生成封装包：</p>
+<p>在go-sdk的3.x之前的版本中，生成的智能合约封装包使用原生Solidity类型。从go-sdk 3.x开始，默认会采用go类型。可以使用 <code>&amp;#x2013;solidityTypes</code>命令行参数创建solidity类型。</p>
+<p>还可以通过直接调用go方法来生成封装包：</p>
 <pre><code>org.gbif.codegen.SolidityFunctionWrapperGenerator /path/to/&lt;smart-contract&gt;.bin /path/to/&lt;smart-contract&gt;.abi -o /path/to/src/main/java -p com.your.organisation.name
 &lt;/smart-contract&gt;&lt;/smart-contract&gt;
 </code></pre>
@@ -176,11 +176,11 @@
 <li>确定合约有效性</li>
 </ul>
 <p>任何需要底层JSON-RPC调用的方法调用都会有一个返回以避免阻塞。</p>
-<p>java-sdk还支持通过命令行工具直接从Tunffle的合约模式生成Java智能合约功能封装包。</p>
+<p>go-sdk还支持通过命令行工具直接从Tunffle的合约模式生成go智能合约功能封装包。</p>
 <pre><code>$ bifj truffle generate [--javaTypes|--solidityTypes] /path/to/&lt;truffle-smart-contract-output&gt;.json -o /path/to/src/main/java -p com.your.organisation.name
 &lt;/truffle-smart-contract-output&gt;
 </code></pre>
-<p>这也可以通过调用Java类来调用：</p>
+<p>这也可以通过调用go方法来调用：</p>
 <pre><code>org.gbif.codegen.TruffleJsonFunctionWrapperGenerator /path/to/&lt;truffle-smart-contract-output&gt;.json -o /path/to/src/main/java -p com.your.organisation.name
 &lt;/truffle-smart-contract-output&gt;
 </code></pre>
@@ -192,6 +192,26 @@
         [&lt;initialvalue&gt;,]
         &lt;param1&gt;, ..., &lt;paramn&gt;).send();
 &lt;/paramn&gt;&lt;/param1&gt;&lt;/initialvalue&gt;&lt;/credentials&gt;&lt;/bifj&gt;
+
+contractObj, err := connection.Core.NewContract(contract.Abi)
+chainId, _ := connection.Core.GetChainId()
+
+nonce, _ := connection.Core.GetTransactionCount(singAddr, block.LATEST)
+
+var sender utils.Address
+sender = utils.StringToAddress(singAddr)
+
+tx := &amp;account.SignTxParams{
+    ChainId:   chainId,
+    Nonce:     nonce,
+    GasPrice:  big.NewInt(200),
+    GasLimit:  200000,
+    Sender:    &amp;sender,
+    Recipient: nil,
+    Amount:    nil,
+}
+
+hash, err := contractObj.Deploy(tx, false, singAddrPriKey, contract.ByteCode)
 </code></pre>
 <p>这个方法将使用提供的凭据和构造函数参数值在TelChain区块链上创建智能合约的新实例。</p>
 <p>如果你的智能合约在构造上接受积分，则只需要初始化参数值 <code>&lt;initialvalue&gt;&lt;/initialvalue&gt;</code>。这就要求在合约中出现支付<a href="http://solidity.readthedocs.io/en/develop/frequently-asked-questions.html?highlight=payable#how-do-i-initialize-a-contract-with-only-a-specific-amount-of-wei">payable</a>。</p>
@@ -206,7 +226,7 @@
                      // at the provided address
 </code></pre>
 <h2 id="9">9.交易管理器</h2>
-<p>java-sdk提供了一个<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/TransactionManager.java">交易管理器TransactionManager</a>来控制你连接到TelChain客户端的方式。默认机制使用java-sdk的<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/RawTransactionManager.java">RawTransactionManager</a>，它与TelChain钱包文件一起工作，在提交到网络之前离线地签署交易。</p>
+<p>go-sdk提供了一个<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/TransactionManager.java">交易管理器TransactionManager</a>来控制你连接到TelChain客户端的方式。默认机制使用go-sdk的<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/RawTransactionManager.java">RawTransactionManager</a>，它与TelChain钱包文件一起工作，在提交到网络之前离线地签署交易。</p>
 <p>但是，你可能希望修改交易管理，也可以将其传递给智能合约部署和构建方法 <code>deploy</code>，而不是凭据对象，即：</p>
 <pre><code>YourSmartContract contract = YourSmartContract.deploy(
         &lt;bifj&gt;, &lt;transactionmanager&gt;, GAS_PRICE, GAS_LIMIT,
@@ -220,13 +240,13 @@
 <pre><code>TransactionManager transactionManager = new RawTransactionManager(
         bifj, credentials, ChainId.MAIN_NET);
 </code></pre>
-<p>为了避免更改配置或代码来指定你正在使用的链，java-sdk默认是不指定交易上的链ID，以简化与库间的交互。然而，TelChain社区的建议是使用链ID。</p>
+<p>为了避免更改配置或代码来指定你正在使用的链，go-sdk默认是不指定交易上的链ID，以简化与库间的交互。然而，TelChain社区的建议是使用链ID。</p>
 <p>你可以通过以下请求获得你的TelChain客户端连接到的网络的链ID：</p>
 <pre><code>gbif.netVersion().send().getNetVersion();
 </code></pre>
 <h2 id="11">11.交易收据处理器</h2>
-<p>默认情况下，当java-sdk向TelChain客户端提交新的交易时，java-sdk将继续轮询客户端直到收据到<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/protocol/core/methods/response/TransactionReceipt.java">TransactionReceipt</a>，指示交易已被添加提交到区块链上。如果你用java-sdk异步发送多个交易，则这会导致多个线程同时轮询客户端。</p>
-<p>在java-sdk中提供了多个处理器：</p>
+<p>默认情况下，当go-sdk向TelChain客户端提交新的交易时，go-sdk将继续轮询客户端直到收据到<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/protocol/core/methods/response/TransactionReceipt.java">TransactionReceipt</a>，指示交易已被添加提交到区块链上。如果你用go-sdk异步发送多个交易，则这会导致多个线程同时轮询客户端。</p>
+<p>在go-sdk中提供了多个处理器：</p>
 <p><strong>注意</strong>：在排队交易收据处理器的初始响应中也提供了 <code>EmptyTransactionReceipt</code>。这允许调用方对提交到网络的交易拥有交易哈希。</p>
 <p>如果你不希望使用默认处理器 <code>PollingTransactionReceiptProcessor</code>，则可以指定交易收据处理器代码如下：</p>
 <pre><code>TransactionReceiptProcessor transactionReceiptProcessor =

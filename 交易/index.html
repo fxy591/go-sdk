@@ -300,6 +300,56 @@ String hexValue = Numeric.toHexString(signedMessage);
 String transactionHash = coreSendTransaction.getTransactionHash();
 // poll for transaction response via org.gbif.protocol.Gbif.coreGetTransactionReceipt(&lt;txhash&gt;)
 &lt;/txhash&gt;
+
+func TestCoreSendRawTransaction(t *testing.T) {
+    var connection = bif.NewBif(providers.NewHTTPProvider(resources.IP00+&quot;:&quot;+strconv.FormatUint(resources.Port, 10), 10, false))
+
+    sender := &quot;did:bid:qwer:sf25XGBQU8E8wGFo9wGKo95jUgtYPM24Y&quot;
+
+    nonce, err := connection.Core.GetTransactionCount(sender, block.LATEST)
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    priKey := &quot;e41219552564c956edeb0fa782c7760a6f5ade504768b3570c68dc0459a7889a&quot;
+
+    recipientStr := &quot;did:bid:qwer:zftAgNtnQzLMGJHKPMdn9quPvuikNWUZ&quot;
+
+    chainId, err := connection.Core.GetChainId()
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    var recipient utils.Address
+    recipient = utils.StringToAddress(recipientStr)
+
+    tx := &amp;account.SignTxParams{
+        Recipient: &amp;recipient,
+        Nonce:     nonce,
+        GasPrice:  big.NewInt(2000000),
+        GasLimit:  uint64(41000),
+        Amount:    big.NewInt(50000000000),
+        Payload:   nil,
+        ChainId:   chainId,
+    }
+
+    res, err := account.SignTransaction(tx, priKey, false)
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    txIDRaw, err := connection.Core.SendRawTransaction(hexutil.Encode(res.Raw))
+
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+    t.Log(txIDRaw)
+
+}
 </code></pre>
 <h2 id="11nonce">11.交易随机数nonce</h2>
 <p><code>nonce</code>是一个不断增长的数值，用来唯一地标识交易。一个 <code>nonce</code>只能使用一次，直到交易被挖掘完成，可以以相同的随机数发送交易的多个版本，但是一旦其中一个被挖掘完成，其他后续提交的都将被拒绝。</p>
@@ -308,11 +358,89 @@ String transactionHash = coreSendTransaction.getTransactionHash();
              address, DefaultBlockParameterName.LATEST).sendAsync().get();
 
      BigInteger nonce = coreGetTransactionCount.getTransactionCount();
+
+func TestCoreGetTransactionCount(t *testing.T) {
+
+    var connection = bif.NewBif(providers.NewHTTPProvider(resources.IP00+&quot;:&quot;+strconv.FormatUint(resources.Port, 10), 10, false))
+
+    generator, _ := connection.Core.GetGenerator()
+
+    count, err := connection.Core.GetTransactionCount(generator, block.LATEST)
+
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    countTwo, err := connection.Core.GetTransactionCount(generator, block.LATEST)
+
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    // count should not change
+    if count.Cmp(countTwo) != 0 {
+        t.Errorf(&quot;Count incorrect, changed between calls&quot;)
+        t.FailNow()
+    }
+}
+
 </code></pre>
 <p>然后可以使用 <code>nonce</code>创建你的交易对象：</p>
 <pre><code>RawTransaction rawTransaction  = RawTransaction.createBiferTransaction(
              nonce, &lt;gas price&gt;, &lt;gas limit&gt;, &lt;toaddress&gt;, &lt;value&gt;);
 &lt;/value&gt;&lt;/toaddress&gt;&lt;/gas&gt;&lt;/gas&gt;
+
+func TestCoreSendRawTransaction(t *testing.T) {
+    var connection = bif.NewBif(providers.NewHTTPProvider(resources.IP00+&quot;:&quot;+strconv.FormatUint(resources.Port, 10), 10, false))
+
+    sender := &quot;did:bid:qwer:sf25XGBQU8E8wGFo9wGKo95jUgtYPM24Y&quot;
+
+    nonce, err := connection.Core.GetTransactionCount(sender, block.LATEST)
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    priKey := &quot;e41219552564c956edeb0fa782c7760a6f5ade504768b3570c68dc0459a7889a&quot;
+
+    recipientStr := &quot;did:bid:qwer:zftAgNtnQzLMGJHKPMdn9quPvuikNWUZ&quot;
+
+    chainId, err := connection.Core.GetChainId()
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    var recipient utils.Address
+    recipient = utils.StringToAddress(recipientStr)
+
+    tx := &amp;account.SignTxParams{
+        Recipient: &amp;recipient,
+        Nonce:     nonce,
+        GasPrice:  big.NewInt(2000000),
+        GasLimit:  uint64(41000),
+        Amount:    big.NewInt(50000000000),
+        Payload:   nil,
+        ChainId:   chainId,
+    }
+
+    res, err := account.SignTransaction(tx, priKey, false)
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    txIDRaw, err := connection.Core.SendRawTransaction(hexutil.Encode(res.Raw))
+
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+    t.Log(txIDRaw)
+
+}
 </code></pre>
 <h2 id="12">12.交易类型</h2>
 <p>go-sdk中的不同类型的交易都使用 <code>Transaction</code>和 <code>RawTransaction</code>对象。关键的区别是交易对象必须始终有一个地址，以便处理 <code>eth_sendTransaction</code>请求的TelChain客户端知道要使用哪个钱包来代表消息发送者并发送该交易。如上所述，对于离线签名认证签署的原始交易而言，这不是必须的。</p>
@@ -346,7 +474,7 @@ TransactionReceipt transactionReceipt = Transfer.sendFunds(
 &lt;/ensname&gt;&lt;/address&gt;
 </code></pre>
 <h2 id="14">14.使用智能合约打包器</h2>
-<p>当使用下面列出的智能合约打包器时，将不得不手动执行从Solidity到本机Java类型的所有转换。使用<a href="https://docs.gbif.io/smart_contracts.html#smart-contract-wrappers">Solidity smart contract wrappers</a>是非常有效的，它负责所有的代码生成和转换。</p>
+<p>当使用下面列出的智能合约打包器时，将不得不手动执行从Solidity到本机go类型的所有转换。使用<a href="https://docs.gbif.io/smart_contracts.html#smart-contract-wrappers">Solidity smart contract wrappers</a>是非常有效的，它负责所有的代码生成和转换。</p>
 <h2 id="15">15.创建一个智能合约</h2>
 <p>要部署新的智能合约，需要提供以下属性：</p>
 <ul>
@@ -372,6 +500,65 @@ if (transactionReceipt.getTransactionReceipt.isPresent()) {
     // try again
 }
 &lt;/compiled&gt;&lt;/value&gt;&lt;/gaslimit&gt;&lt;/gasprice&gt;&lt;/nonce&gt;
+
+func TestCoreGetTransactionReceipt(t *testing.T) {
+
+    var connection = bif.NewBif(providers.NewHTTPProvider(resources.IP00+&quot;:&quot;+strconv.FormatUint(resources.Port, 10), 10, false))
+    sender := &quot;did:bid:qwer:sf25XGBQU8E8wGFo9wGKo95jUgtYPM24Y&quot;
+    priKey := &quot;e41219552564c956edeb0fa782c7760a6f5ade504768b3570c68dc0459a7889a&quot;
+
+    recipient := &quot;did:bid:qwer:zftAgNtnQzLMGJHKPMdn9quPvuikNWUZ&quot;
+
+    txID, err := signAndSingTx(connection, recipient, sender, priKey, false)
+
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    var receipt *dto.TransactionReceipt
+    for receipt == nil {
+        time.Sleep(time.Second)
+        receipt, err = connection.Core.GetTransactionReceipt(txID)
+    }
+    if err != nil {
+        t.Error(err)
+        t.FailNow()
+    }
+
+    if len(receipt.ContractAddress) == 0 {
+        t.Log(&quot;No contract address&quot;)
+    }
+
+    if len(receipt.TransactionHash) == 0 {
+        t.Error(&quot;No transaction hash&quot;)
+        t.FailNow()
+    }
+
+    if receipt.TransactionIndex == nil {
+        t.Error(&quot;No transaction index&quot;)
+        t.FailNow()
+    }
+
+    if len(receipt.BlockHash) == 0 {
+        t.Error(&quot;No block hash&quot;)
+        t.FailNow()
+    }
+
+    if receipt.BlockNumber == nil || receipt.BlockNumber.Cmp(big.NewInt(0)) == 0 {
+        t.Error(&quot;No block number&quot;)
+        t.FailNow()
+    }
+
+    if receipt.Logs == nil || len(receipt.Logs) == 0 {
+        t.Log(&quot;No logs&quot;)
+    }
+
+    if !receipt.Status {
+        t.Error(&quot;False status&quot;)
+        t.FailNow()
+    }
+}
 </code></pre>
 <p>如果智能合约包含构造函数，则必须对关联的构造函数字段值进行编码，并将其附加到编译的智能合约代码中 <code>compiled smart contract code</code>：</p>
 <pre><code>String encodedConstructor =
@@ -397,7 +584,7 @@ Transaction transaction = Transaction.createContractTransaction(
 <li>value：在智能合约中你希望存放的积分Bifer量(如果智能合约接受积分Bifer的话)</li>
 <li>data: 已编码的函数选择器和自变量参数</li>
 </ul>
-<p>java-sdk负责函数编码，有关实现的进一步细节，请参阅应用程序二进制接口部分<a href="https://docs.gbif.io/abi.html">Application Binary Interface</a>。</p>
+<p>go-sdk负责函数编码，有关实现的进一步细节，请参阅应用程序二进制接口部分<a href="https://docs.gbif.io/abi.html">Application Binary Interface</a>。</p>
 <pre><code>Function function = new Function&lt;&gt;(
              &quot;functionName&quot;,  // function we're calling
              Arrays.asList(new Type(value), ...),  // Parameters to pass as Solidity Types
