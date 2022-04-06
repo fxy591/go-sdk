@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>ABI - My Test</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ABI";
+        var mkdocs_page_input_path = "ABI.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> My Test
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">入门介绍</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%A8%A1%E5%9D%97/">模块</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E4%BA%A4%E6%98%93/">交易</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">ABI</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1abi">1.应用二进制接口即ABI简介</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2.类型映射</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3abi">3.ABI的进一步细节</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4.依赖关系</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../RLP/">RLP</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">My Test</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>ABI</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="abi">ABI</h1>
+<h2 id="1abi">1.应用二进制接口即ABI简介</h2>
+<p>java-sdk开发dapp的应用二进制接口(ABI)是在BifereumTelChain使用java开发的智能合约的数据编码方案。ABI中定义的类型与solidity编写智能合约时所遇到的类型完全相同，即uint8...uint256,int8...int256,布尔bool,字符串string等等。</p>
+<p>java-sdk中的ABI模块提供了对ABI规范的完全支持，并且包括：</p>
+<ul>
+<li>所有ABI类型的Java实现，包括到原生Java类型的转换</li>
+<li>函数与事件支持</li>
+<li>大量单元测试</li>
+</ul>
+<h2 id="2">2.类型映射</h2>
+<p>java-sdk中使用的原生Java到ABI类型映射如下：</p>
+<ul>
+<li>boolean -&gt; bool</li>
+<li>BigInteger -&gt; uint/int</li>
+<li>byte[] -&gt; bytes</li>
+<li>String -&gt; string and address types</li>
+<li>List&lt;&gt; -&gt; dynamic/static array</li>
+</ul>
+<p>BigInteger类型必须用于数字类型，因为BifereumTelChain中的数字类型是256位整数值。</p>
+<p><a href="http://solidity.readthedocs.io/en/develop/abi-spec.html#types">Fixed point types</a>固定点类型已被定义为TelChain定义了，但目前在<a href="https://github.com/ethereum/solidity/issues/409">Solidity还没有实现</a>，因此java-sdk目前不支持它们（它们是在3.x之前提供的）。一旦在Solidity可用，它们将被重新引入到java-sdk的ABI模块中。</p>
+<p>有关在Java中使用ABI类型的更多信息，请参考<a href="https://docs.gbif.io/smart_contracts.html#smart-contract-wrappers">Solidity smart contract wrappers</a></p>
+<h2 id="3abi">3.ABI的进一步细节</h2>
+<p>可以参阅各种ABI单元测试的编码/解码的<a href="https://github.com/bifj/bifj/tree/master/abi/src/test/java/org/bifj/abi">例子</a>。</p>
+<p>完整的ABI规范文件可以看<a href="http://solidity.readthedocs.io/en/develop/abi-spec.html">Solidity documentation</a>。</p>
+<h2 id="4">4.依赖关系</h2>
+<p>ABI一个非常轻量级的模块，唯一的第三方依赖是<a href="https://www.bouncycastle.org/">Bouncy Castle</a>，用于hash加密 (<a href="https://rtyley.github.io/spongycastle/">Spongy Castle</a> on Android)。</p>
+<p>最后希望java和安卓开发者，在JVM或Android上有TelChainABI合作的项目时会选择使用这个模块，而不是再编写自己的实现。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="btn btn-neutral float-left" title="智能合约"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../RLP/" class="btn btn-neutral float-right" title="RLP">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../RLP/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

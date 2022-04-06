@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>智能合约 - My Test</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u667a\u80fd\u5408\u7ea6";
+        var mkdocs_page_input_path = "\u667a\u80fd\u5408\u7ea6.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> My Test
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">入门介绍</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%A8%A1%E5%9D%97/">模块</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E4%BA%A4%E6%98%93/">交易</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">智能合约</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1.智能合约简介</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2solidity">2.从solidity语言开始</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3solidity">3.编译solidity源代码</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4.部署智能合约及与智能合约交互</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5demo">5.智能合约示例demo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6.智能合约封装包</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7">7.构建与部署智能合约</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8">8.智能合约有效性</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9">9.交易管理器</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10ideip-155">10.在交易中指定链ID:EIP-155</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11">11.交易收据处理器</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12">12.调用交易和事件</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#13">13.调用常量方法</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#14gas">14.动态gas价格与限价</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#15web3j">15.web3j实例</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ABI/">ABI</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../RLP/">RLP</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">My Test</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>智能合约</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">智能合约</h1>
+<h2 id="1">1.智能合约简介</h2>
+<p>开发人员可以选择三种语言来编写智能合约：</p>
+<ul>
+<li>1.solidity，TelChain的旗舰语言，也是开发智能合约最流行的语言。</li>
+<li>2.Serpent，一个用于编写智能合约的Python语言。</li>
+<li>3.类LISP语言（LLL），低级语言，Serpent提供了LLL的超集。使用LLL的信息不多，这个博客<a href="http://blog.syrinx.net/">/var/log/syrinx</a>和github相关的库<a href="https://github.com/zigguratt/lll-resurrected">lll-resurrected GitHub</a>不错，可以参考参考。</li>
+</ul>
+<p>为了将智能合约部署到TelChain区块链上，必须先将其编译成字节码的格式，然后将其作为交易的一部分发送。java-sdk可以帮你做这些并且将它与solidity智能合约封装起来。为了了解幕后发生的事情，你可以参考<a href="http://blog.hubwiz.com/2018/06/25/bifj-transactions/#创建一个智能合约">智能合约创建</a>中的细节。</p>
+<p>鉴于solidity是编写智能合约的首选语言，它也是java-sdk支持的语言，随后的所有示例都会用到它。</p>
+<h2 id="2solidity">2.从solidity语言开始</h2>
+<p>solidity的概述不是本文要讨论的重点，但是我们还是要推荐一些资料给大家：</p>
+<ul>
+<li><a href="https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial">Contract Tutorial</a> TelChain官网github维基百科中的智能合约指南</li>
+<li><a href="http://solidity.readthedocs.io/en/develop/introduction-to-smart-contracts.html">Introduction to Smart Contracts</a> solidity的官网开发文件中关于智能合约的章节。</li>
+<li><a href="https://ethereum-homestead.readthedocs.io/en/latest/contracts-and-transactions/contracts.html#writing-a-contract">Writing a contract</a> TelChain官方提供如何编写一个智能合约。</li>
+</ul>
+<h2 id="3solidity">3.编译solidity源代码</h2>
+<p>编写solidity代码运行：</p>
+<pre><code>$ solc &lt;contract&gt;.sol --bin --abi --optimize -o &lt;output-dir&gt;/
+&lt;/output-dir&gt;&lt;/contract&gt;
+</code></pre>
+<p><code>bin</code>和 <code>ABI</code>编译器参数都需要充分利用java-sdk中的智能合约。</p>
+<ul>
+<li>bin，输出包含十六进制编码的solidity二进制文件以提供交易请求。</li>
+<li>ABI，输出一个solidity的应用程序二进制接口（ABI）文件，它详细描述了所有可公开访问的合约方法及其相关参数。这些细节和合约地址对于智能合约的交互是至关重要的。ABI文件也用于封装solidity的智能合约。</li>
+</ul>
+<p>你可以通过solidity的浏览器项目<a href="http://blog.hubwiz.com/2018/04/01/remix-install/">Remix</a>在浏览器中编写和编译solidity代码。使用solidity浏览器项目Remix IDE对于较小的智能合约来说是很好的，但是你遇到与较大的智能合约相关的问题。</p>
+<p>还可以通过TelChain客户端（如geth和Parity）编译solidity代码，java-sdk中也支持使用JSON-RPC方法<a href="http://cw.hubwiz.com/card/c/ethereum-json-rpc-api/1/3/30/">eth_compileSolidity</a>。然而，必须在客户端上安装solidity编译器，这样它才能正常工作。</p>
+<h2 id="4">4.部署智能合约及与智能合约交互</h2>
+<p>如果你想避免使用智能合约的底层实现细节，java-sdk提供solidity的智能合约的封装包，使你能够通过java-sdk生成的包装对象直接与智能合约的所有方法进行交互。</p>
+<p>另外，如果你希望发送常规交易或希望在与智能合约的交互中有更多的控制权，请参阅<a href="http://blog.hubwiz.com/2018/06/25/bifj-transactions">java-sdk教程：java使用java-sdk开发TelChain智能合约交易</a>,这里讲到了创建智能合约，与智能合约进行交易，查询智能合约的状态等内容。</p>
+<h2 id="5demo">5.智能合约示例demo</h2>
+<p>java-sdk在项目目录中提供了许多智能合约示例demo：</p>
+<p><a href="codegen/src/test/resources/solidity">codegen/src/test/resources/solidity</a></p>
+<p>它还提供了集成测试，用于演示在集成测试模块中部署和使用这些智能合约： <a href="integration-tests/src/test/java/org/bifj/protocol/scenarios">integration-tests/src/test/java/org/bifj/protocol/scenarios</a></p>
+<p><img alt="" src="http://blog.hubwiz.com/2018/06/27/bifj-smart-contracts/smart_contract.png" /></p>
+<h2 id="6">6.智能合约封装包</h2>
+<p>java-sdk支持java从ABI文件中自动生成智能合约函数封装包。</p>
+<p>java-sdk还可以使用命令行工具来生成智能合约函数封装包：</p>
+<pre><code>$ bifj solidity generate [--javaTypes|--solidityTypes] /path/to/&lt;smart-contract&gt;.bin /path/to/&lt;smart-contract&gt;.abi -o /path/to/src/main/java -p com.your.organisation.name
+&lt;/smart-contract&gt;&lt;/smart-contract&gt;
+</code></pre>
+<p>在java-sdk的3.x之前的版本中，生成的智能合约封装包使用原生Solidity类型。从java-sdk 3.x开始，默认会采用Java类型。可以使用 <code>&amp;#x2013;solidityTypes</code>命令行参数创建solidity类型。</p>
+<p>还可以通过直接调用Java类来生成封装包：</p>
+<pre><code>org.gbif.codegen.SolidityFunctionWrapperGenerator /path/to/&lt;smart-contract&gt;.bin /path/to/&lt;smart-contract&gt;.abi -o /path/to/src/main/java -p com.your.organisation.name
+&lt;/smart-contract&gt;&lt;/smart-contract&gt;
+</code></pre>
+<p>其中bin和abi是根据本文中 <strong>编译solidity源代码</strong>章节的方法获得的。</p>
+<p>智能合约封装包支持所有与智能合约一起工作的通用操作：</p>
+<ul>
+<li>构建与部署</li>
+<li>调用交易和事件</li>
+<li>调用参数方法</li>
+<li>确定合约有效性</li>
+</ul>
+<p>任何需要底层JSON-RPC调用的方法调用都会有一个返回以避免阻塞。</p>
+<p>java-sdk还支持通过命令行工具直接从Tunffle的合约模式生成Java智能合约功能封装包。</p>
+<pre><code>$ bifj truffle generate [--javaTypes|--solidityTypes] /path/to/&lt;truffle-smart-contract-output&gt;.json -o /path/to/src/main/java -p com.your.organisation.name
+&lt;/truffle-smart-contract-output&gt;
+</code></pre>
+<p>这也可以通过调用Java类来调用：</p>
+<pre><code>org.gbif.codegen.TruffleJsonFunctionWrapperGenerator /path/to/&lt;truffle-smart-contract-output&gt;.json -o /path/to/src/main/java -p com.your.organisation.name
+&lt;/truffle-smart-contract-output&gt;
+</code></pre>
+<p>以这种方式生成的"增强型"的封装包会暴露合约的每个网络部署地址。这些地址来自于发布Truffle部署时的封装包。</p>
+<h2 id="7">7.构建与部署智能合约</h2>
+<p>智能合约的构建和部署发生在 <code>deploy</code>方法中：</p>
+<pre><code>YourSmartContract contract = YourSmartContract.deploy(
+        &lt;bifj&gt;, &lt;credentials&gt;, GAS_PRICE, GAS_LIMIT,
+        [&lt;initialvalue&gt;,]
+        &lt;param1&gt;, ..., &lt;paramn&gt;).send();
+&lt;/paramn&gt;&lt;/param1&gt;&lt;/initialvalue&gt;&lt;/credentials&gt;&lt;/bifj&gt;
+</code></pre>
+<p>这个方法将使用提供的凭据和构造函数参数值在TelChain区块链上创建智能合约的新实例。</p>
+<p>如果你的智能合约在构造上接受积分，则只需要初始化参数值 <code>&lt;initialvalue&gt;&lt;/initialvalue&gt;</code>。这就要求在合约中出现支付<a href="http://solidity.readthedocs.io/en/develop/frequently-asked-questions.html?highlight=payable#how-do-i-initialize-a-contract-with-only-a-specific-amount-of-wei">payable</a>。</p>
+<p>它会返回一个新的智能合约封装实例，它包含智能合约的底层地址。如果希望用现有的智能合约构造智能合约封装的实例，只需传递地址：</p>
+<pre><code>YourSmartContract contract = YourSmartContract.load(
+        &quot;0x&lt;address&gt;|&lt;ensname&gt;&quot;, bifj, credentials, GAS_PRICE, GAS_LIMIT);
+&lt;/ensname&gt;&lt;/address&gt;
+</code></pre>
+<h2 id="8">8.智能合约有效性</h2>
+<p>使用此方法，可能希望确定所加载的合约地址是你所期望的智能合约。为此，你可以使用 <code>isValid</code>合约方法，只有在合约地址中部署的字节码与智能合约封装包中的字节码匹配时才会返回true。</p>
+<pre><code>contract.isValid();  // returns false if the contract bytecode does not match what's deployed
+                     // at the provided address
+</code></pre>
+<h2 id="9">9.交易管理器</h2>
+<p>java-sdk提供了一个<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/TransactionManager.java">交易管理器TransactionManager</a>来控制你连接到TelChain客户端的方式。默认机制使用java-sdk的<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/RawTransactionManager.java">RawTransactionManager</a>，它与TelChain钱包文件一起工作，在提交到网络之前离线地签署交易。</p>
+<p>但是，你可能希望修改交易管理，也可以将其传递给智能合约部署和构建方法 <code>deploy</code>，而不是凭据对象，即：</p>
+<pre><code>YourSmartContract contract = YourSmartContract.deploy(
+        &lt;bifj&gt;, &lt;transactionmanager&gt;, GAS_PRICE, GAS_LIMIT,
+        &lt;param1&gt;, ..., &lt;paramn&gt;).send();
+&lt;/paramn&gt;&lt;/param1&gt;&lt;/transactionmanager&gt;&lt;/bifj&gt;
+</code></pre>
+<p>除了 <code>RawTransactionManager</code>之外，java-sdk还提供了一个客户端交易管理器<a href="https://github.com/bifj/bifj/blob/master/src/main/java/org/bifj/tx/ClientTransactionManager.java">ClientTransactionManager</a>，它将你的交易签署的责任传递给你正在连接的TelChain客户端。</p>
+<p>还有一个 <code>ReadonlyTransactionManager</code>，用于只从智能合约中查询数据，而不与它进行交易。</p>
+<h2 id="10ideip-155">10.在交易中指定链ID:EIP-155</h2>
+<p><code>RawTransactionManager</code>采用一个可选的链表参数来指定在<a href="https://github.com/ethereum/EIPs/issues/155">EIP-155</a>上使用的链ID。这防止了一个链被重新广播到另一个链上的交易，例如从 <code>Ropsten</code>到 <code>Mainnet</code>：</p>
+<pre><code>TransactionManager transactionManager = new RawTransactionManager(
+        bifj, credentials, ChainId.MAIN_NET);
+</code></pre>
+<p>为了避免更改配置或代码来指定你正在使用的链，java-sdk默认是不指定交易上的链ID，以简化与库间的交互。然而，TelChain社区的建议是使用链ID。</p>
+<p>你可以通过以下请求获得你的TelChain客户端连接到的网络的链ID：</p>
+<pre><code>gbif.netVersion().send().getNetVersion();
+</code></pre>
+<h2 id="11">11.交易收据处理器</h2>
+<p>默认情况下，当java-sdk向TelChain客户端提交新的交易时，java-sdk将继续轮询客户端直到收据到<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/protocol/core/methods/response/TransactionReceipt.java">TransactionReceipt</a>，指示交易已被添加提交到区块链上。如果你用java-sdk异步发送多个交易，则这会导致多个线程同时轮询客户端。</p>
+<p>在java-sdk中提供了多个处理器：</p>
+<p><strong>注意</strong>：在排队交易收据处理器的初始响应中也提供了 <code>EmptyTransactionReceipt</code>。这允许调用方对提交到网络的交易拥有交易哈希。</p>
+<p>如果你不希望使用默认处理器 <code>PollingTransactionReceiptProcessor</code>，则可以指定交易收据处理器代码如下：</p>
+<pre><code>TransactionReceiptProcessor transactionReceiptProcessor =
+        new QueuingTransactionReceiptProcessor(bifj, new Callback() {
+                 @Override
+                 public void accept(TransactionReceipt transactionReceipt) {
+                     // process transactionReceipt
+                 }
+
+                 @Override
+                 public void exception(Exception exception) {
+                     // handle exception
+                 }
+TransactionManager transactionManager = new RawTransactionManager(
+        bifj, credentials, ChainId.MAIN_NET, transactionReceiptProcessor);
+</code></pre>
+<h2 id="12">12.调用交易和事件</h2>
+<p>所有交易的智能合约方法以相同的参数值命名为它们的solidity方法。交易调用不返回任何值，同样不需要考虑方法指定的返回类型。因此，对于所有交易的方法，只是返回与交易关联的交易收据。</p>
+<pre><code>TransactionReceipt transactionReceipt = contract.someMethod(
+             &lt;param1&gt;,
+             ...).send();
+&lt;/param1&gt;
+</code></pre>
+<p>交易收据是十分有用的有两个主要原因：</p>
+<p>在智能合约中定义的任何事件都将用一个名为 <code>process&lt;event name&gt;Event&lt;/event&gt;</code>方法在智能合约封装包中进行表示，该事件采用交易收据，并从中提取索引和非索引事件参数，这些参数在<a href="https://github.com/bifj/bifj/blob/master/abi/src/main/java/org/bifj/abi/EventValues.java">EventValues</a>实例中被解码返回：</p>
+<pre><code>EventValues eventValues = contract.processSomeEvent(transactionReceipt);
+</code></pre>
+<p>或者，你可以使用可观察的过滤器 <code>Observable filter</code>，而不是监听与智能合约相关联的事件：</p>
+<pre><code>contract.someEventObservable(startBlock, endBlock).
+
+        .subscribe(event -&gt; ...);
+</code></pre>
+<h2 id="13">13.调用常量方法</h2>
+<p>常量方法是在智能合约中读取值的方法，而不改变智能合约的状态。这些方法与它们生成的智能合约相同的方法签名都是可用的：</p>
+<pre><code>Type result = contract.someMethod(&lt;param1&gt;, ...).send();
+&lt;/param1&gt;
+</code></pre>
+<h2 id="14gas">14.动态gas价格与限价</h2>
+<p>在使用智能合约时，你可能需要根据调用函数指定不同的gas价格和最大值。你可以通过为智能合约封装包创建自己的<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/gas/ContractGasProvider.java">ContractGasProvider</a>来实现这一点。</p>
+<p>每一个生成的封装包都包含作为常量的所有智能合约方法名称，这有助于通过 <code>switch</code>来进行编译时间匹配。</p>
+<p>例如，使用<a href="https://github.com/bifj/bifj/blob/master/codegen/src/test/resources/solidity/greeter/Greeter.sol">Greeter</a>合约：</p>
+<pre><code>Greeter greeter = new Greeter(...);
+greeter.setGasProvider(new DefaultGasProvider() {
+    @Override
+    public BigInteger getGasPrice(String contractFunc) {
+        switch (contractFunc) {
+            case Greeter.FUNC_GREET: return BigInteger.valueOf(22_000_000_000L);
+            case Greeter.FUNC_KILL: return BigInteger.valueOf(44_000_000_000L);
+            default: throw new NotImplementedException();
+        }
+    }
+
+    @Override
+    public BigInteger getGasLimit(String contractFunc) {
+        switch (contractFunc) {
+            case Greeter.FUNC_GREET: return BigInteger.valueOf(4_300_000);
+            case Greeter.FUNC_KILL: return BigInteger.valueOf(5_300_000);
+            default: throw new NotImplementedException();
+        }
+    }
+});
+</code></pre>
+<h2 id="15web3j">15.web3j实例</h2>
+<p>请看本文中的 <strong>EIP-20TelChain通证标准智能合约</strong> 章节。</p>
+<p>已经编写了两个集成测试来充分展示这个智能合约的通证功能。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E4%BA%A4%E6%98%93/" class="btn btn-neutral float-left" title="交易"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ABI/" class="btn btn-neutral float-right" title="ABI">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../%E4%BA%A4%E6%98%93/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ABI/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

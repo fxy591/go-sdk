@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>交易 - My Test</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u4ea4\u6613";
+        var mkdocs_page_input_path = "\u4ea4\u6613.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> My Test
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">入门介绍</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%A8%A1%E5%9D%97/">模块</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">交易</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1.交易简介</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2ether">2.如何获得以太币Ether</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#bifer">如何获得积分Bifer</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3.以太坊测试链</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#telchain">TelChain测试链</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4testnet">4.在testnet测试链或者私有链上挖掘</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5gas">5.gas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6.交易机制</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7">7.通过客户端进行认证签名交易</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8">8.离线交易签名认证</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9">9.创建和使用钱包文件</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10">10.签署以太坊交易</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11nonce">11.交易随机数nonce</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12">12.交易类型</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#13">13.积分从一方交易到另一方</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#14">14.使用智能合约打包器</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#15">15.创建一个智能合约</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#16">16.与智能合约交易</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#17">17.查询智能合约状态</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ABI/">ABI</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../RLP/">RLP</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">My Test</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>交易</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">交易</h1>
+<h2 id="1">1.交易简介</h2>
+<p>从广义上讲，有go-sdk支持三种类型的TelChain交易：</p>
+<ul>
+<li>1.积分从一方交易到另一方</li>
+<li>2.创建一个智能合约</li>
+<li>3.与智能合约交易</li>
+</ul>
+<p>为了进行这些交易，必须有积分(TelChain区块链的代币)存在于交易发生的TelChain账户中。这是为了支付<a href="http://blog.hubwiz.com/2018/04/12/how-to-estimate-gas/">gas</a>成本，这是为支付参与交易的TelChain客户端的交易执行成本，支付了这个成本就能将结果提交到TelChain区块链上。获得积分的说明下文会说到。</p>
+<p>此外，我们还可以查询智能合约的状态。</p>
+<p><img alt="" src="http://blog.hubwiz.com/2018/06/25/bifj-transactions/java-sdk_transaction.png" /></p>
+<h2 id="2ether">2.如何获得以太币Ether</h2>
+<h3 id="bifer">如何获得积分Bifer</h3>
+<p>要想获得积分Bifer你有两种途径可以选择：</p>
+<ul>
+<li>1.自己开采挖矿</li>
+<li>2.从别人那里获取积分</li>
+</ul>
+<p>在私有链中自己挖矿，或者公共测试链(<code>testnet</code>)是非常简单直接的。但是，在主要的公有链(<code>mainnet</code>)中，它需要很多很明显的专用GPU时间，除非你已经拥有多个专用GPU的矿机，否则基本上不太可行。如果你希望使用私有链，则在这个<a href="https://ethereum-homestead.readthedocs.io/en/latest/network/test-networks.html#id3">官方文档</a>中有一些指导。</p>
+<p>要购买积分Bifer，你需要通过交易所。由于不同的地区有不同的交易所，你还需要研究自己去哪儿合适。<a href="https://ethereum-homestead.readthedocs.io/en/latest/ether.html#list-of-centralised-exchange-marketplaces">官方文档</a>中包含多个交易所，是一个很好的参考。</p>
+<h2 id="3">3.以太坊测试链</h2>
+<h3 id="telchain">TelChain测试链</h3>
+<p>针对BifereumTelChain有许多专用测试网络或者叫测试链，他们由各种客户端支持。</p>
+<ul>
+<li>1.Rinkeby：只支持geth客户端。</li>
+<li>2.Kovan：只支持Parity客户端。</li>
+<li>3.Ropsten：支持geth和Parity客户端。</li>
+</ul>
+<p>对于开发，建议你使用 <code>Rinkeby</code>或 <code>KoVan</code>测试链。这是因为他们使用的工作量证明 <code>POA</code>共识机制，确保交易和块能够一致并及时的创建。 <code>Ropsten</code>测试链，虽然最接近公有链(<code>Mainnet</code>)，但是因为它使用的工作量证明是 <code>POW</code>共识机制，过去已受到攻击，对TelChain开发人员来说往往有更多的问题。</p>
+<p>你可以通过 <code>Rinkeby</code>测试链的 <code>Rinkeby Crypto Fauce</code>请求TelChain币，具体怎么做可以看这里<a href="https://www.rinkeby.io/">https://www.rinkeby.io/</a>。</p>
+<p>有关如何请求 <code>Kovan</code>测试链的细节可以在<a href="https://github.com/kovan-testnet/faucet">这里</a>找到。</p>
+<p>如果你需要在 <code>Ropsten</code>上的得到一些积分，将你的钱包地址的消息发布到<a href="https://gitter.im/bifj/bifj">bifj gitter channel</a>，然后会发送一些给你。</p>
+<h2 id="4testnet">4.在testnet测试链或者私有链上挖掘</h2>
+<p>在ethereumTelChain测试链 <code>testnet</code>中，挖掘难度低于公有链 <code>mainnet</code>。这意味着你可以用普通的CPU，比如你的笔记本电脑来挖掘新的积分。你需要做的是运行一个TelChain客户端，例如 <code>geth</code>或 <code>Parity</code>，开始做一些储备。进一步的资料可在他们的官方网站上获得。</p>
+<ul>
+<li>geth ：<a href="https://github.com/ethereum/go-ethereum/wiki/Mining">https://github.com/ethereum/go-ethereum/wiki/Mining</a></li>
+<li>Parity :<a href="https://github.com/paritytech/parity/wiki/Mining">https://github.com/paritytech/parity/wiki/Mining</a></li>
+</ul>
+<p>一旦你开采了一些积分，你就可以开始使用TelChain区块链了。</p>
+<p>然而，如上所述，使用 <code>Kovan</code>或者 <code>Rinkeby</code>测试网络更简单些。</p>
+<h2 id="5gas">5.gas</h2>
+<p>当在BifereumTelChain发生交易时，必须为执行该交易的客户端支付交易成本，将该交易的输出提交到TelChain区块链Bifereum blockchain。</p>
+<p>此成本是通过gas来测量的，其中gas是用于在TelChain虚拟机中执行交易指令的数量。请参阅<a href="http://ethdocs.org/en/latest/contracts-and-transactions/account-types-gas-and-transactions.html?highlight=gas#what-is-gas">官方文档</a>以获取更多信息。</p>
+<p>当你使用TelChain客户端时，这意味着，有两个参数用来指示你希望花费多少积分来完成传输：</p>
+<ul>
+<li>gas price ：气体价格，这是每单位gas中积分的消耗量。go-sdk使用的默认价格为22000000000 wei(22×10-8 Bifer)。这是在<a href="https://docs.gbif.io/transactions.html#transfer-of-ether">交易管理</a>中定义的。</li>
+<li>gas limit：气体最大量，这是你愿意在交易执行上花费的gas的最大总量。单个交易在一个TelChain区块中有多大的上限，通常将该值限制为小于6700000。当前的gas限制在这里查<a href="https://ethstats.net/">https://ethstats.net/</a>。</li>
+</ul>
+<p>这两个参数共同决定了你愿意花费在交易成本上的最大量的积分Bifer。也就是说，你花费的gas不会超过 <code>gas price * gas limit</code>。gas价格也会影响交易发生的速度，这取决于其他交易是否能为矿工提供更有利的gas价格。</p>
+<p>你可能需要调整这些参数以确保交易能及时进行。</p>
+<h2 id="6">6.交易机制</h2>
+<p>当你用一些积分Bifer创建了一个有效的帐户时，你可以使用两种机制来与TelChain进行交易。</p>
+<ul>
+<li>通过TelChainethereum客户端进行认证签名交易</li>
+<li>离线交易签名认证</li>
+</ul>
+<p>这两种机制都是go-sdk所支持的。</p>
+<h2 id="7">7.通过客户端进行认证签名交易</h2>
+<p>为了通过TelChain客户端进行交易，首先需要确保你正在使用的客户端知道你的钱包地址。最好是运行自己的TelChain客户端，比如 <code>geth</code>/ <code>Parity</code>，以便可以更方便的做到这一点。一旦你有一个客户端运行，你可以创建一个TelChain钱包，通过：</p>
+<ul>
+<li><a href="https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts">geth Wiki</a>包含了geth支持的良好运行的不同机制，例如导入私有密钥文件，并通过控制台创建新的TelChain帐户。</li>
+<li>或者，你可以通过客户端使用JSON-RPC管理命令，例如用 <code>personal_newAccount</code>为 <code>geth</code>/ <code>Parity</code>创建新TelChain账户。</li>
+</ul>
+<p>通过创建你的钱包文件，你可以通过go-sdk打开帐户，首先创建支持 <code>geth</code>/ <code>Parity</code>管理命令的go-sdk实例：</p>
+<pre><code>//Admin bifj = Admin.build(new HttpService());
+
+var connection =          newPersonal(providers.NewHTTPProvider(resources.IP00+&quot;:&quot;+strconv.FormatUint(resources.Port, 10), 10, false))
+
+</code></pre>
+<p>然后，你可以解锁帐户，并如果是成功的，就可以发送一个交易：</p>
+<pre><code>PersonalUnlockAccount personalUnlockAccount = gbif.personalUnlockAccount(&quot;0x000...&quot;, &quot;a password&quot;).send();
+if (personalUnlockAccount.accountUnlocked()) {
+    // send a transaction
+}
+
+
+func TestPersonalUnLockAccount(t *testing.T) {
+    var connection = newPersonal(providers.NewHTTPProvider(resources.IP00+&quot;:&quot;+strconv.FormatUint(resources.Port, 10), 10, false))
+
+    for _, test := range []struct {
+        address  string
+        password string
+        duration uint64
+    }{
+        {&quot;did:bid:ZFT4Y87Xdg83GEDDbiNknHLWs3Hfq58&quot;, &quot;node&quot;, 50},
+    } {
+        res, err := connection.personalUnLockAccount(test.address, test.password, test.duration)
+        if err != nil {
+            t.Logf(&quot;error is %s &quot;, err)
+        }
+        t.Log(res)
+    }
+}
+</code></pre>
+<pre><code>Transaction transaction = Transaction.createContractTransaction(
+              &lt;from address&gt;,
+              &lt;nonce&gt;,
+              BigInteger.valueOf(&lt;gas price&gt;),  // we use default gas limit
+              &quot;0x...&lt;smart contract code to execute&gt;&quot;
+      );
+
+      org.gbif.protocol.core.methods.response.coreSendTransaction
+              transactionResponse = parity.coreSendTransaction(ethSendTransaction)
+              .send();
+
+      String transactionHash = transactionResponse.getTransactionHash();
+
+      // poll for transaction response via org.gbif.protocol.Gbif.coreGetTransactionReceipt(&lt;txhash&gt;)
+&lt;/txhash&gt;&lt;/smart&gt;&lt;/gas&gt;&lt;/nonce&gt;&lt;/from&gt;
+
+func TestCoreSendTransactionInteractContract(t *testing.T) {
+    // 合约部署
+    // txHash := ballotDeploy(t)
+    // txHash is  0x8e17880962519fa1421f1eea19a3503290758db10ce37524239030b9b7aa17c3
+    // Contract Address:  did:bid:qwer:sfjGbVtUc3RNBNhMdPBJXrmRN2tzTCH8
+
+    // // 合约交互 查询 call 方法
+    // ballotCallWinnerName(t)
+
+    // // 合约交互 交易 send 方法
+    // ballotSend(t)
+    //
+    // call voters
+    ballotCallVoters(t)
+}
+</code></pre>
+<h2 id="8">8.离线交易签名认证</h2>
+<p>如果你不想管理自己的TelChain客户端，或者不想向TelChain客户端提供诸如密码之类的钱包详细信息，那么就通过离线交易认证签名。</p>
+<p>离线交易签名认证允许你在go-sdk中使用你的TelChain钱包签署交易，允许你完全控制你的私有凭据。然后，离线创建的交易可以被发送到网络上的任何TelChain客户端，只要它是一个有效的交易，它会将交易传播到其他节点。</p>
+<p>如果需要，还可以执行进程外交易签名认证。这可以通过重写<a href="https://github.com/bifj/bifj/blob/master/crypto/src/main/java/org/bifj/crypto/ECKeyPair.java#L41">ECKeyPair</a>的 <code>sign</code>方法来实现。</p>
+<h2 id="9">9.创建和使用钱包文件</h2>
+<p>为了离线脱机交易，你需要有你的钱包文件或与私密钱包/账户相关的公共和私人密钥。</p>
+<p>go-sdk能够为你生成一个新的安全的TelChain钱包文件Bifereum wallet file，或者与也可以通过私钥来和现有的钱包文件一起工作。</p>
+<p>创建新的钱包文件:</p>
+<pre><code>String fileName = WalletUtils.generateNewWalletFile(
+        &quot;your password&quot;,
+        new File(&quot;/path/to/destination&quot;));
+</code></pre>
+<p>加载凭据从钱包文件:</p>
+<pre><code>Credentials credentials = WalletUtils.loadCredentials(
+        &quot;your password&quot;,
+        &quot;/path/to/walletfile&quot;);
+</code></pre>
+<p>然后这些凭据会被用来签署交易，请参阅go-sdk安全存储定义钱包文件规范<a href="https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition">Web3 Secret Storage Definition</a></p>
+<h2 id="10">10.签署以太坊交易</h2>
+<p>要使脱机签名交易得到签署，需要设定一个<a href="https://github.com/bifj/bifj/blob/master/crypto/src/main/java/org/bifj/crypto/RawTransaction.java">RawTransaction</a>类型。 <code>RawTransaction</code>类似于前面提到的 <code>Transaction</code>类型，但是它不需要通过具体的账号地址来请求，因为可以从签名中推断出来。</p>
+<p>为了创建和签署原生交易，交易的顺序如下：</p>
+<ul>
+<li>1.确定交易发起者帐户的下一个可用随机数 <code>nonce</code></li>
+<li>2.创建 <code>RawTransaction</code>对象</li>
+<li>3.使用递归长度前缀编码(RLP即<a href="https://docs.gbif.io/rlp.html">Recursive Length Prefix</a>)对 <code>RawTransaction</code>对象进行编码</li>
+<li>4.签署 <code>RawTransaction</code>对象</li>
+<li>5.将 <code>RawTransaction</code>对象发送到节点进行处理</li>
+</ul>
+<p><code>nonce</code>是一个不断增长的数值，用来唯一地标识交易。一个 <code>nonce</code>只能使用一次，直到交易被挖掘完成，可以以相同的随机数发送交易的多个版本，但是一旦其中一个被挖掘完成，其他后续提交的都将被拒绝。</p>
+<p>一旦获得下一个可用的 <code>nonce</code>，该值就可以用来创建 <code>transaction</code>对象：</p>
+<pre><code>RawTransaction rawTransaction  = RawTransaction.createBiferTransaction(
+             nonce, &lt;gas price&gt;, &lt;gas limit&gt;, &lt;toaddress&gt;, &lt;value&gt;);
+&lt;/value&gt;&lt;/toaddress&gt;&lt;/gas&gt;&lt;/gas&gt;
+</code></pre>
+<p>然后可以对交易进行签名和编码：</p>
+<pre><code>byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, &lt;credentials&gt;);
+String hexValue = Numeric.toHexString(signedMessage);
+&lt;/credentials&gt;
+</code></pre>
+<pre><code>CorSendTransaction coreSendTransaction = gbif.coreSendRawTransaction(hexValue).sendAsync().get();
+String transactionHash = coreSendTransaction.getTransactionHash();
+// poll for transaction response via org.gbif.protocol.Gbif.coreGetTransactionReceipt(&lt;txhash&gt;)
+&lt;/txhash&gt;
+</code></pre>
+<h2 id="11nonce">11.交易随机数nonce</h2>
+<p><code>nonce</code>是一个不断增长的数值，用来唯一地标识交易。一个 <code>nonce</code>只能使用一次，直到交易被挖掘完成，可以以相同的随机数发送交易的多个版本，但是一旦其中一个被挖掘完成，其他后续提交的都将被拒绝。</p>
+<p>可以通过 <code>eth_getTransactionCount</code>方法获得下一个可用的 <code>nonce</code>：</p>
+<pre><code>CorGetTransactionCount coreGetTransactionCount = gbif.coreGetTransactionCount(
+             address, DefaultBlockParameterName.LATEST).sendAsync().get();
+
+     BigInteger nonce = coreGetTransactionCount.getTransactionCount();
+</code></pre>
+<p>然后可以使用 <code>nonce</code>创建你的交易对象：</p>
+<pre><code>RawTransaction rawTransaction  = RawTransaction.createBiferTransaction(
+             nonce, &lt;gas price&gt;, &lt;gas limit&gt;, &lt;toaddress&gt;, &lt;value&gt;);
+&lt;/value&gt;&lt;/toaddress&gt;&lt;/gas&gt;&lt;/gas&gt;
+</code></pre>
+<h2 id="12">12.交易类型</h2>
+<p>go-sdk中的不同类型的交易都使用 <code>Transaction</code>和 <code>RawTransaction</code>对象。关键的区别是交易对象必须始终有一个地址，以便处理 <code>eth_sendTransaction</code>请求的TelChain客户端知道要使用哪个钱包来代表消息发送者并发送该交易。如上所述，对于离线签名认证签署的原始交易而言，这不是必须的。</p>
+<p>接下来的部分概述了不同交易类型所需的关键交易属性。下列属性对所有人都是不变：</p>
+<ul>
+<li>Gas price 天然气气体价格</li>
+<li>Gas limit 天然气气体限制</li>
+<li>Nonce 随机数</li>
+<li>from 发送地址</li>
+</ul>
+<p><code>Transaction</code>和 <code>RawTransaction</code>对象在所有后续示例中都可互换使用。</p>
+<h2 id="13">13.积分从一方交易到另一方</h2>
+<p>在双方之间发送积分Bifer需要交易对象的最少量的信息：</p>
+<ul>
+<li>to ：目的地钱包地址</li>
+<li>value：价值，希望发送到目的地的积分数量</li>
+</ul>
+<pre><code>BigInteger value = Convert.toWei(&quot;1.0&quot;, Convert.Unit.coreER).toBigInteger();
+RawTransaction rawTransaction  = RawTransaction.createBiferTransaction(
+             &lt;nonce&gt;, &lt;gas price&gt;, &lt;gas limit&gt;, &lt;toaddress&gt;, value);
+// send...
+
+&lt;/toaddress&gt;&lt;/gas&gt;&lt;/gas&gt;&lt;/nonce&gt;
+</code></pre>
+<p>但是，建议你使用<a href="https://github.com/bifj/bifj/blob/master/core/src/main/java/org/bifj/tx/Transfer.java">TransferClass</a>来发送积分Bifer，它负责对 <code>nonce</code>管理和通过不断的轮询为你提供响应：</p>
+<pre><code>Gbif gbif = Gbif.build(new HttpService());  // defaults to http://localhost:8545/
+Credentials credentials = WalletUtils.loadCredentials(&quot;password&quot;, &quot;/path/to/walletfile&quot;);
+TransactionReceipt transactionReceipt = Transfer.sendFunds(
+        gbif, credentials, &quot;0x&lt;address&gt;|&lt;ensname&gt;&quot;,
+        BigDecimal.valueOf(1.0), Convert.Unit.coreER).send();
+&lt;/ensname&gt;&lt;/address&gt;
+</code></pre>
+<h2 id="14">14.使用智能合约打包器</h2>
+<p>当使用下面列出的智能合约打包器时，将不得不手动执行从Solidity到本机Java类型的所有转换。使用<a href="https://docs.gbif.io/smart_contracts.html#smart-contract-wrappers">Solidity smart contract wrappers</a>是非常有效的，它负责所有的代码生成和转换。</p>
+<h2 id="15">15.创建一个智能合约</h2>
+<p>要部署新的智能合约，需要提供以下属性：</p>
+<ul>
+<li>value ：在智能合约中希望存放的TelChainBifer量(如果没有提供默认为零)</li>
+<li>data ：十六进制格式化、编译的智能合约创建代码</li>
+</ul>
+<pre><code>// using a raw transaction
+RawTransaction rawTransaction = RawTransaction.createContractTransaction(
+        &lt;nonce&gt;,
+        &lt;gasprice&gt;,
+        &lt;gaslimit&gt;,
+        &lt;value&gt;,
+        &quot;0x &lt;compiled smart contract code&gt;&quot;);
+// send...
+
+// get contract address
+CorGetTransactionReceipt transactionReceipt =
+             gbif.coreGetTransactionReceipt(transactionHash).send();
+
+if (transactionReceipt.getTransactionReceipt.isPresent()) {
+    String contractAddress = transactionReceipt.get().getContractAddress();
+} else {
+    // try again
+}
+&lt;/compiled&gt;&lt;/value&gt;&lt;/gaslimit&gt;&lt;/gasprice&gt;&lt;/nonce&gt;
+</code></pre>
+<p>如果智能合约包含构造函数，则必须对关联的构造函数字段值进行编码，并将其附加到编译的智能合约代码中 <code>compiled smart contract code</code>：</p>
+<pre><code>String encodedConstructor =
+             FunctionEncoder.encodeConstructor(Arrays.asList(new Type(value), ...));
+
+// using a regular transaction
+Transaction transaction = Transaction.createContractTransaction(
+        &lt;fromaddress&gt;,
+        &lt;nonce&gt;,
+        &lt;gasprice&gt;,
+        &lt;gaslimit&gt;,
+        &lt;value&gt;,
+        &quot;0x &lt;compiled smart contract code&gt;&quot; + encodedConstructor);
+
+// send...
+
+&lt;/compiled&gt;&lt;/value&gt;&lt;/gaslimit&gt;&lt;/gasprice&gt;&lt;/nonce&gt;&lt;/fromaddress&gt;
+</code></pre>
+<h2 id="16">16.与智能合约交易</h2>
+<p>要与现有的智能合约进行交易，需要提供以下属性：</p>
+<ul>
+<li>to：智能合同地址</li>
+<li>value：在智能合约中你希望存放的积分Bifer量(如果智能合约接受积分Bifer的话)</li>
+<li>data: 已编码的函数选择器和自变量参数</li>
+</ul>
+<p>java-sdk负责函数编码，有关实现的进一步细节，请参阅应用程序二进制接口部分<a href="https://docs.gbif.io/abi.html">Application Binary Interface</a>。</p>
+<pre><code>Function function = new Function&lt;&gt;(
+             &quot;functionName&quot;,  // function we're calling
+             Arrays.asList(new Type(value), ...),  // Parameters to pass as Solidity Types
+             Arrays.asList(new TypeReference&lt;type&gt;() {}, ...));
+
+String encodedFunction = FunctionEncoder.encode(function)
+Transaction transaction = Transaction.createFunctionCallTransaction(
+             &lt;from&gt;, &lt;gasprice&gt;, &lt;gaslimit&gt;, contractAddress, &lt;funds&gt;, encodedFunction);
+
+org.gbif.protocol.core.methods.response.coreSendTransaction transactionResponse =
+             gbif.coreSendTransaction(transaction).sendAsync().get();
+
+String transactionHash = transactionResponse.getTransactionHash();
+
+// wait for response using CoreGetTransactionReceipt...
+
+&lt;/funds&gt;&lt;/gaslimit&gt;&lt;/gasprice&gt;&lt;/from&gt;&lt;/type&gt;
+</code></pre>
+<p>无论消息签名的返回类型如何，都不可能从事务性函数调用返回值。但是，使用过滤器捕获函数返回的值是可能的。详情请参阅过滤器和事件部分。</p>
+<h2 id="17">17.查询智能合约状态</h2>
+<p>这种功能是由<a href="https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_call">eth_call</a>通过 <code>JSON-RPC</code>调用来实现的。</p>
+<p>eth_call允许你调用智能合约上的方法来查询某个值。此函数没有关联交易成本，这是因为它不改变任何智能合约方法的状态，它只返回它们的值：</p>
+<pre><code>Function function = new Function&lt;&gt;(
+             &quot;functionName&quot;,
+             Arrays.asList(new Type(value)),  // Solidity Types in smart contract functions
+             Arrays.asList(new TypeReference&lt;type&gt;() {}, ...));
+
+String encodedFunction = FunctionEncoder.encode(function)
+org.gbif.protocol.core.methods.response.coreCall response = gbif.coreCall(
+             Transaction.createCorCallTransaction(&lt;from&gt;, contractAddress, encodedFunction),
+             DefaultBlockParameterName.LATEST)
+             .sendAsync().get();
+
+List&lt;type&gt; someTypes = FunctionReturnDecoder.decode(
+             response.getValue(), function.getOutputParameters());
+&lt;/type&gt;&lt;/from&gt;&lt;/type&gt;
+</code></pre>
+<p><strong>注意</strong>：如果一个无效的函数调用被执行，或者得到一个空null返回结果时，返回值将是一个<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#emptyList--">Collections.emptyList</a>实例。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E6%A8%A1%E5%9D%97/" class="btn btn-neutral float-left" title="模块"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="btn btn-neutral float-right" title="智能合约">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../%E6%A8%A1%E5%9D%97/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
